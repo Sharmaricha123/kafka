@@ -1,5 +1,6 @@
 package com.kafka.NotificationService.consumer;
 
+import com.kafka.event.UserCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -8,14 +9,22 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserKafkaConsumer {
 
-    @KafkaListener(topics = "user-random-topic")
-    public void handleUserRandomTopic1(String message){
+    @KafkaListener(topics = "user-created-topic")
+    public void handleUserCreated(UserCreatedEvent userCreatedEvent){
 
-        log.info("handleUserRandomTopic1 : {}",message);
+        log.info("handleUserCreated : {}",userCreatedEvent);
 
     }
 
+
     @KafkaListener(topics = "user-random-topic")
+    public void handleUserRandomTopic1(String message) {
+
+        log.info("handleUserRandomTopic1 : {}", message);
+    }
+
+
+        @KafkaListener(topics = "user-random-topic")
     public void handleUserRandomTopic2(String message){
 
         log.info("handleUserRandomTopic2 : {}",message);
